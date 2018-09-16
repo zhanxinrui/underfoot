@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="learn javascript by www.liaoxuefeng.com">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+<style>
+    html{font-size:62.5%;}
+    body{
+        display:grid;
+        grid-template-columns : 1fr 1.3fr 1fr;
+        grid-template-rows: auto 3rem 60rem auto 1fr ;
+        grid-template-areas:"top-bar top-bar top-bar"
+                            "main-header main-header main-header "
+                            ". content ."
+                            ". remain . "
+                            " main-footer main-footer main-footer";
+    }
+    .top-bar{
+        grid-area:top-bar;
+        background:yellow;
+        padding:0.4rem 0rem;
+    }
+
+    .content{
+        grid-area:content;
+        background:#cecece;
+        padding:0.4rem 0rem;
+    }
+    .remain{
+        grid-area:remain;
+        background: gray;
+        padding:0.4rem 0rem;
+    }
+    .main-footer{
+        grid-area:main-footer;
+        padding:0.4rem 0rem;
+        background: brown;
+    }
+
+    .content{
+        display:grid;
+        grid-template-columns:auto 1fr auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:". searchbar ."
+                            ". searchbar ."
+                            ". searchbar . ";
+    }
+    .searchbar{
+        grid-area: searchbar;
+        background: white;
+    }
+    .input-group{
+        padding:1rem 1rem;
+    }
+    .btn-cube{
+        width:3.2rem;
+        height:3.2rem;
+    }
+    button.btn-cube{
+        margin:0px 0px;
+        padding:0px;
+        width:4.5rem;
+        height:3.5rem;
+    }
+    .main-header{
+    grid-area: main-header;
+    background: red ;  
+    padding:0rem;
+        margin:0rem;
+    }
+    .toright{
+        font-size:1.7rem;
+       
+        display:flex;
+        justify-content: flex-end ;
+        padding:0rem;
+        margin:0rem;
+    }
+    .navbar-nav > li > a, .navbar-brand {/*a影响导航栏高度*/
+    padding-top:0px !important; 
+    padding-bottom:0 !important;
+    
+}
+    .thumbnail{
+        padding:0rem 0rem !important;
+        margin:0rem 0rem !important;
+            width:3rem !important;
+    height:3rem !important;
+    display:block;
+    }
+img.item-avatar {
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+   
+}
+.navbar {min-height:20px !important;}
+ul.nav{
+    position:relative;
+}
+#alertdiv{
+    position:absolute;
+    top:3.1rem;
+    right:0rem;
+
+}
+
+</style>
+<script>
+
+    $(document).ready(function(){
+        //上下搜索
+        $(".google-search1").click(function(){
+            window.open('http://www.google.com/search?q='+$("#g-input").val(),'');
+
+        });
+
+        $(".bing-search1").click(function(){
+            var a =$(this).prev().val;
+            window.open(' https://cn.bing.com/search?q='+$(this).prev('input').val()+ '&ensearch=1&FORM=BESBTB','');
+        });
+    //中间进行搜索
+        $(".baidu-search").click(function(){
+            window.open('http://www.baidu.com/s?wd='+$('#main-search').val(),'');
+        });
+
+
+        $(".google-search").click(function(){
+            window.open('http://www.google.com/search?q='+$('#main-search').val(),'');
+
+        });
+
+        $(".bing-search").click(function(){
+
+            window.open(' https://cn.bing.com/search?q='+$('#main-search').val()+ '&ensearch=1&FORM=BESBTB','');
+        });
+        $(".open-list").click(function(){
+            console.log('adf');
+            if($(".toggle-meta").css("visibility")=="hidden"){
+                console.log('sdf');
+              $(".toggle-meta").css("visibility","visible");
+              $(".open-list").html('<span class="glyphicon glyphicon-minus" ></span>');
+
+            }
+            else if($(".toggle-meta").css("visibility")=="visible"){
+              $(".toggle-meta").css("visibility","hidden");
+               $(".open-list").html('<span class="glyphicon glyphicon-plus" ></span>');
+            }
+
+        });
+        $('#quit').click(function(){
+            $('#alertdiv').attr("class","alert alert-warning alert-dismissible ")
+        })
+        //$('#alert').alert('close');
+
+    })
+
+
+</script>
+</head>
+<body>
+
+    <header class= "top-bar">1 </header>
+    <header class="main-header"> {% block main %} {% endblock %} </header>
+     
+    <section class="content">
+        <div class="searchbar">
+            <!-- 上 -->
+            <div class = "input-group toggle-meta" style="margin:15rem 3rem 3rem 3rem;visibility:hidden;">
+                <span  class = "input-group-addon btn-cube" style="padding: 0;" ><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524317676093&di=37c8e857f73a42c7f7b536631f4e72ac&imgtype=0&src=http%3A%2F%2Fimg.25pp.com%2Fuploadfile%2Fapp%2Ficon%2F20160412%2F1460468903527282.jpg" alt="g"class = "btn-cube"></span>
+                <input class = "form-control" type="text" style="width:50rem" placeholder = "google it" id = "g-input">
+                <button class="btn btn-warning google-search1 btn-cube" type="button" style=" padding:0.5rem" >Go</button>
+            </div>
+
+            <!-- 中 -->
+            <div class = "input-group" style="margin:3rem 3rem 3rem 3rem;">
+                <span  class = "input-group-addon btn-cube" style="padding: 0;"><img src="https://thumbnail0.baidupcs.com/thumbnail/1845455949d7889bfef8845c16cdc809?fid=689753756-250528-199978780524477&time=1524308400&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-YwCjKg%2FOW3zk2TXo7zT7h5tyEI4%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=2569781493007183712&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="b" class ="btn-cube"></span>
+                <input class = "form-control" type="text"style="width:50rem"placeholder="baidu..." id = "main-search">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary baidu-search btn-cube" type="button" style="padding:0.5rem">Du</button>
+                    <button class="btn btn-success bing-search btn-cube" type="button"style="padding:0.5rem;">Bin
+                    </button>
+                    <button class="btn btn-warning google-search btn-cube" type="button" style=" padding:0.5rem;" >GG
+                    </button>
+
+                    <button class = "btn btn-info btn-cube open-list" type = "button" style="padding:0.5rem;">
+                        <span class="glyphicon glyphicon-plus" ></span>
+                        <!-- 要加入opcity  等会 -->
+                    </span>
+
+                </span>
+            </div>
+
+            <!-- 下 -->
+            <div class = "input-group toggle-meta" style="margin:3rem 3rem 3rem 3rem; visibility: hidden;">
+                <span  class = "input-group-addon btn-cube" style="padding: 0;" ><img src="https://thumbnail0.baidupcs.com/thumbnail/ff755395f7d892d4f96d0b174a45e246?fid=689753756-250528-884916396775229&time=1524308400&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-VrMGC%2FZ2E0YfCfjW7kWvaQSTGRQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=2569716570321899615&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="b" class = "btn-cube"></span>
+                <input class = "form-control" type="text"style="width:50rem"
+                placeholder="bing...">
+
+                <button class="btn btn-success bing-search1 btn-cube" type="button" style="padding:0.5rem;"> Go
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <section class = "remain"> 4</section>
+    <footer class="main-footer">5</footer>
+
+
+</body>
+
+</html>
+
+
+
