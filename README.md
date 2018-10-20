@@ -1,2 +1,2 @@
-# underfoot
-personal
+# earth
+run npm start to preview the app
