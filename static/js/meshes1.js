@@ -83,8 +83,8 @@ $(()=>{
 				// camera
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 2000000 );
 				camera.position.set( 0, 50, 1500 );
-				stats = new Stats();
-				container.appendChild( stats.dom );
+				// stats = new Stats();
+				// container.appendChild( stats.dom );
 				loader = new THREE.TextureLoader();
 			}
 			function initTextures(){
@@ -651,8 +651,8 @@ $(()=>{
 					depthTest: false,
 					color:0x777777,
 			        side: THREE.BackSide,
-					wrapAround : true,
-					wrapRGB : THREE.Vector3(0,1,0)
+					// wrapAround : true,
+					// wrapRGB : THREE.Vector3(0,1,0)
 
 				});
 				var materialBottom = new THREE.MeshLambertMaterial({color: 0xffffff, side:THREE.BackSide,
@@ -706,7 +706,7 @@ $(()=>{
 			function animate() {
 				requestAnimationFrame( animate );
 				render();
-				stats.update();
+				// stats.update();
 			    TWEEN.update();
 			}
 			function render() {

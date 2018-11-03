@@ -37,9 +37,9 @@
 
 			#cas {
 			position: absolute;
-			right: 5%;
+			right: 0%;
 			top: 0;
-	
+
 			display: block;
 			margin: auto;
 			}
@@ -57,13 +57,14 @@
 			/* background: url(../assets/universe.jpg); */
 			z-index: -110; /*放最底层相当于当了背景*/
 			}
-			.content{
-				width:100%;
-				height:4rem !important;
+			/*.content{
+				width:50%;
+				height:3rem !important;
 				position:absolute;
 				top:1rem;
+				left:2rem;
 
-			}
+			}*/
 			.input-group{
 				 display: -webkit-flex;
 			    display: flex;
@@ -72,14 +73,14 @@
 			    -webkit-justify-content: center;
 			    justify-content: flex-start;
 				width:11rem;
-				height:.5rem;
+				height:.42rem;
 				padding:0px;
-				margin:0.5rem 0 0 1rem;
+				margin:0.5rem 0 0 0rem;
 			}
 
 			.btn-cube,.search-icon{
-				width: .55rem !important;
-				height:.55rem !important;
+				width: .42rem !important;
+				height:.42rem !important;
 				box-shadow:0 1px 5px gray;
 
 			}
@@ -89,9 +90,9 @@
 				background:transparent;
 				font-family:"SimHei";
 				color:#fff;
-				font-size:.23rem;
-				width:6.6rem;
-				height:.51rem !important;
+				font-size:.18rem;
+				width:5.2rem;
+				height:.38rem !important;
 				text-shadow: 2px 2px 1.5px #000;
 
 				border:1px solid #fff;
@@ -111,22 +112,24 @@
 			}
 			.search-button{
 				display: inline-block;
-				width:.6rem !important;
-				height:.55rem !important; 
+				width:.48rem !important;
+				height:.42rem !important; 
 				text-align: center;
 			}
 			.searchbar{
-				width:11rem !important;
-				height:4rem !important;
+				position:absolute;
+				width:9rem !important;
+				height:.45rem !important;
 				/*position:relative;*/
 				margin:2rem auto;
+				left:25%;
 				/*padding:1rem .3rem 0 .3rem ;*/
 				
 				/*top:1rem;*/
 			}
 			#search-plus{
-				width:.55rem !important;
-				height:.55rem !important;
+				width:.42rem !important;
+				height:.42rem !important;
 			    display:inline-block;
   				vertical-align:middle;/*要在子元素中设置verti-align*/
 
@@ -190,14 +193,14 @@
 			}
 			#search-plus:hover{
 				/*padding:.02rem 0 0 .02rem;*/
-				width:.58rem !important;
-				height:.58rem !important;
+				width:.45rem !important;
+				height:.45rem !important;
 
 			}
 			#search-plus:active{
 				/*padding:.02rem 0 0 .02rem;*/
-				width:.5rem !important;
-				height:.5rem !important;
+				width:.4rem !important;
+				height:.4rem !important;
 
 			}
 			/*
@@ -210,7 +213,7 @@
 				margin: 0;
 				padding: 0;
 				outline: none;  /*  //消除默认点击蓝色边框效果*/
-				font-size:.23rem !important;
+				font-size:.18rem !important;
 
 			}
 		</style>
@@ -275,7 +278,6 @@
 
 		});
 	})</script>
-		<section class="content">
 			<div class="searchbar">
 				<!-- 上 -->
 				<div class="input-group" id="up-group">
@@ -303,8 +305,7 @@
 					</button>
 				</div>
 			</div>
-		</section>
-		<canvas id="cas" width="300" height="150">抱歉，您的浏览器不支持canvas</canvas>
+		<canvas id="cas" width="300" height="160">抱歉，您的浏览器不支持canvas</canvas>
 		<div id="interactive"></div>	
 	</body>
 </html>

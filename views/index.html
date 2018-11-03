@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <title>Login</title>
 
-   
+   <style>
+   [v-cloak] {
+    display: none !important;  
+    }
+    </style>    
 </head>
 
 <body>
 
-<div id="wrapper" >  
-    <div id="load-bar">
-        <canvas>Loading</canvas>
-        <div id="load-tag">Loading</div>
+<div id="wrapper"  >  
+    <div id="load-bar" >
+        <canvas >Loading</canvas>
+        <div id="load-tag"  >Loading</div>
         <div id="load-count">0%</div>
     </div>
     <div id="interactive"></div> 
 
 
-    <div class="checkin-content">
+    <div class="checkin-content" v-cloak>
         
         <!-- login -->
         <div id = "login-content">        
