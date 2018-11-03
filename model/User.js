@@ -2,7 +2,7 @@
 const db = require('../db');
  //映射表结构
  module.exports = db.defineModel('user',{
-	id:{
+	id:{ //电话或邮箱
 	type:db.STRING(50),
 	primaryKey:true
 	},

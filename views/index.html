@@ -1,61 +1,176 @@
-{% extends "base.html" %} 
-{% block main %}
-<section class = "top-menu ">
-    <nav class="navbar navbar-inverse" role = "navigation">
-    <!-- topbar -->
-    <div class = "container-fluid toright" >
-        <ul class = "nav navbar-nav" >
-            <li class = "active"><a href = '#'>reserved1</a></li>
-            <li><a href = '#'>reserved1</a></li>
-            <li><a href = '#'>reserved1</a></li>
-            <li >
-                {% block in %}
-                <a class="btn btn-primary btn-md" data-toggle = "modal" data-target = "#myMoadl">
-                    Log
-                </a>
-                <!-- modal -->
-                <div class="modal fade" id="myMoadl" tabindex='-1'>
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button class="close" type="button" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                 <h3 class="modal-title">
-                                    <span class="glyphicon glyphicon-user"></span> Please sign in
-                                </h3>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/signin" method="post">
-                                    <div class="form-group">
-                                        <label>Email address</label>
-                                        <input type="email" name="email" class="form-control" placeholder="Email">
-                                        <p class="help-block">Use email: admin@example.com</p>
-                                    </div>
-                                    <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
-                                    <p class="help-block">Use password: 123456</p>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign In</button>
-                                <button type="button" class= "btn btn-primary" data-dismiss="modal">quit</button>
-                                </form>
-                            </div>
-                           
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+   
+</head>
+
+<body>
+
+<div id="wrapper" >  
+    <div id="load-bar">
+        <canvas>Loading</canvas>
+        <div id="load-tag">Loading</div>
+        <div id="load-count">0%</div>
+    </div>
+    <div id="interactive"></div> 
+
+
+    <div class="checkin-content">
+        
+        <!-- login -->
+        <div id = "login-content">        
+            <div class="login-header">
+                <div>UNDERFOOT</div>
+                <button id="login-close-button">×</button>
+            </div>
+            <form id= "login-modal">
+                <div class="login-input-box">
+                    <input v-model="account" type="text" v-validate="'required|account'" data-vv-as="0" name="account" placeholder="Please enter your email/phone">
+                    <div class="errors underinput" v-show="errors.has('account')" v-cloak>
+                        [[ errors.first('account') ]]
                     </div>
                 </div>
-              {% endblock %}
-            </li>
+    
+                <div class="login-input-box">
+                    <span class="icon icon-password"></span>
+                    <input v-model="password" type="password" v-validate="'required|min:6|max:20|alpha_num'" name="password" data-vv-as="password" placeholder="Please enter your password">
+                    <div class="errors underinput" v-show="errors.has('password')" v-cloak>
+                        [[ errors.first('password') ]]
+                    </div>  
+                </div>
+                <div class="img-verify-code">
+                    <input v-model="img_verify_code" data-vv-as="img_verify_code" 
+                    v-validate="'required|img_verify_code'"type="text" name="img_verify_code" value="" placeholder="Please enter img-code" type="text" value="">
+                  
+                    <div id="verify-img">
+                        <input id="verify-img-button" type="button" name="verify-img" >
+                    </div>
+                    <div class="errors " v-show="errors.has('img_verify_code')" v-cloak>
+                        [[ errors.first('img_verify_code') ]]
+                    </div>  
+                </div>
+            </form>
+            <div class="remember-box">
+                <input type="checkbox" class="checkbox">&nbsp;
+                <label style= "vertical-align:middle;">
+                    Remember Me
+                </label>
+            </div>
+            <div class="login-button-box" @click="validateBeforeSubmit()">
+                <button>Login</button>
+            </div>
+            <div class="logon-box">
+                <a href="#verify-content" class="verify-button">Forgot?</a>
+                <a href="#register-content"class="register-button">Register</a>
+            </div>
+        </div>
 
-            {% block out%}
-            {% endblock %}
-        </ul>
-                
 
-    </a>
+        <!-- verify the phone -->
+        <div id="verify-content">
+            <div class="verify-header">
+                <div>UNDERFOOT</div>
+                <button id="verify-close-button">×</button>
+            </div>
+            <form id= "verify-modal">
+                <div class="verify-input-box">
+                    <label for="verify-phone" class="register-label">Phone:</label>
+                    <input v-model="account" v-validate="'required|account'" name="account" data-vv-as="0" type="text" placeholder="enter your phone to receive the verification code" id = "verify-phone">
+                    <div class="errors underinput" v-show="errors.has('account')" v-cloak>
+                       [[ errors.first('account') ]]
+                    </div>  
+                </div>
+                <div class="verify-input-box2">
+                    <label for="verify-code" class="register-label">Code:</label>
+                    <input  v-model="verify_code" name="verify_code"  v-validate="'required|verify_code'" data-vv-as="000000" type="text" placeholder=" Verification code" >
+                    <div class="verify-send-button" id="verify-send-button1">
+                        <button  type="button" >send</button>
+                    </div>
+                    <div class="errors underinput" v-show="errors.has('verify_code')" v-cloak>
+                        [[ errors.first('verify_code') ]]
+                    </div> 
+                </div>
+            </form>
+            <div class="confirm-verify-button" @click="validateBeforeSubmit()">
+                <button>Confirm</button>
+            </div>
+            <div class="logon-box">
+                <a href="#login-content" class="log-button">log in</a>
+                <a href="#register-content"class="register-button">Register</a>
+            </div>
+        </div>
 
-    </nav>
 
-</section>
-{% endblock %}
+        <!-- register the account -->
+        <div id="register-content">
+            <div class="register-header">
+                <div>UNDERFOOT</div>
+                <button id="register-close-button">×</button>
+            </div>
+
+            <form id= "register-modal">
+                <div class="register-input-box">
+                    <label for="register-phone" class="register-label">Phone:</label>
+                    <input v-model="account" v-validate="'required|account'" data-vv-as="phone" name="account" type="text" placeholder="enter your phone to receive the verification code" id = "register-phone">
+                    <div class="errors underinput" v-show="errors.has('account')" v-cloak>
+                        [[ errors.first('account') ]]
+                    </div>    
+                </div>
+
+                <div class="verify-input-box2">
+                    <label for="verify-code" class="register-label">Code:</label>
+                    <input  v-model="verify_code" name="verify_code"  v-validate="'required|verify_code'" data-vv-as="verify-code" type="text" placeholder=" Verification code">
+                    <div class="verify-send-button" id="verify-send-button2">
+                        <button type="button" >send</button>
+                    </div>
+                    <div class="errors underinput" v-show="errors.has('verify_code')" v-cloak>
+                        [[ errors.first('verify_code') ]]
+                    </div> 
+                </div>
+
+                <div class="register-input-box3">
+                    <label for="register-password" class="register-label">Password:</label>
+                    <input v-model="password" v-validate="'required|min:6|max:20|alpha_num'" data-vv-as="passwd" name="password"type="password" placeholder="Enter your password " id = "register-password"> 
+                    <div class="errors underinput" v-show="errors.has('password')" v-cloak>
+                        [[ errors.first('password') ]]
+                    </div>    
+                </div>
+
+                <div class="register-input-box3">
+                <label for="register-password-again"class="register-label">Again:</label>
+                <input v-model="password_again" name="password_again" data-vv-as="password_again" v-validate="{'required': 'true|password_again', 'is': password}"type="password" placeholder="Enter your password again" id = "register-password-again">
+                <div class="errors underinput" v-show="errors.has('password_again')" v-cloak>
+                    [[ errors.first('password_again') ]]
+                </div>     
+                </div>
+            </form>
+            <div class="agree-box" id="agree-policy">
+                <input type="checkbox"  class="checkbox">    
+                <label style="vertical-align:middle;">
+                    &nbsp; I hereby agree Agreement, Privacy Policy, Product Terms and Terms of Use
+                </label>
+            </div>
+            <div class="confirm-register-button" @click="validateBeforeSubmit()">
+                <button>Confirm</button>
+            </div>
+
+            <div class="logon-box">
+                <a href="#login-content" class="log-button" >log in</a>
+            </div>
+        </div>  
+    </div>   
+</div> 
+
+
+
+<script  src="../static/js/common.js"></script>
+<script  src="../static/js/meshes.js"></script>
+<script  src="../static/js/runtime.js"></script>
+<!-- 加入语言包 -->
+<script type="text/javascript" src="https://cdn.bootcss.com/vee-validate/2.0.9/locale/zh_CN.js" ></script> 
+
+</body>
+</html>

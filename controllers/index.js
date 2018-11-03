@@ -4,5 +4,10 @@ module.exports = {
         ctx.render('index.html', {
             title: 'Search'
         });
+    },
+    'GET /homepage': async (ctx, next) => {
+        ctx.render('homepage.html', {
+            title: 'Search'
+        });
     }
 };

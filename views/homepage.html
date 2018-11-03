@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Scenery</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+
+						html{
+				font-size:100px !important;
+				height:100%;
+				width:100%;
+			}
+			body {
+				color: #000;
+				font-family: Monospace;
+				font-size:.15rem;
+				text-align:center;
+				font-weight: bold;
+				
+				background-color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				padding: 10px;
+				width: 100%;
+				text-align: center;
+			}
+
+			a {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+
+			#cas {
+			position: absolute;
+			right: 5%;
+			top: 0;
+	
+			display: block;
+			margin: auto;
+			}
+
+			#interactive {
+			/* display: block; */
+			display:block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			min-width: 480px;
+			overflow: hidden;
+			/* background: url(../assets/universe.jpg); */
+			z-index: -110; /*放最底层相当于当了背景*/
+			}
+			.content{
+				width:100%;
+				height:4rem !important;
+				position:absolute;
+				top:1rem;
+
+			}
+			.input-group{
+				 display: -webkit-flex;
+			    display: flex;
+			    -webkit-align-items: center;
+			    align-items: center;
+			    -webkit-justify-content: center;
+			    justify-content: flex-start;
+				width:11rem;
+				height:.5rem;
+				padding:0px;
+				margin:0.5rem 0 0 1rem;
+			}
+
+			.btn-cube,.search-icon{
+				width: .55rem !important;
+				height:.55rem !important;
+				box-shadow:0 1px 5px gray;
+
+			}
+			/*字体效果*/
+
+			#up-input ,#mid-input, #bot-input{
+				background:transparent;
+				font-family:"SimHei";
+				color:#fff;
+				font-size:.23rem;
+				width:6.6rem;
+				height:.51rem !important;
+				text-shadow: 2px 2px 1.5px #000;
+
+				border:1px solid #fff;
+
+				/*box-shadow:0 .5px 0 .5px gray;*/
+			    outline: 1px solid gray;
+			}
+			#up-input:focus,#mid-input:focus, #bot-input:focus{
+			    outline: 2px solid gray;
+				/*box-shadow:0 .5px 0 .5px gray;*/
+
+			}
+			#up-group,#bot-group{
+				visibility:hidden;
+				/*position: absolute;*/
+				/*left:10%;*/
+			}
+			.search-button{
+				display: inline-block;
+				width:.6rem !important;
+				height:.55rem !important; 
+				text-align: center;
+			}
+			.searchbar{
+				width:11rem !important;
+				height:4rem !important;
+				/*position:relative;*/
+				margin:2rem auto;
+				/*padding:1rem .3rem 0 .3rem ;*/
+				
+				/*top:1rem;*/
+			}
+			#search-plus{
+				width:.55rem !important;
+				height:.55rem !important;
+			    display:inline-block;
+  				vertical-align:middle;/*要在子元素中设置verti-align*/
+
+			}
+			.open-list{
+				 background-color:transparent	!important;
+				border: 0px solid transparent;  
+
+			}
+			.arc-border{
+				border-radius: 0 .05rem .05rem 0;
+			}
+			#google-logo{
+				background-color:#f0ad4e;
+				border: 1px solid #f0ad4e;  
+				box-shadow:0 1px 5px gray;
+			}
+			#baidu-logo{
+				background-color:#337ab7;
+				border: 1px solid #337ab7;
+				box-shadow:0 1px 5px gray;
+
+			}	
+			#bing-logo{
+				background-color:#4cae4c;
+				border: 1px solid #4cae4c;  
+				box-shadow:0 1px 5px gray;
+			}
+			/*hover时放大*/
+			#bing-logo:hover{
+			    /*border:.1rem solid transparent !important;*/
+				box-shadow:0 0 0 2px #4cae4c !important;
+
+			}
+			#baidu-logo:hover{
+			    /*border:.1rem solid transparent !important;*/
+				box-shadow:0 0 0 2px  #337ab7 !important;
+
+			}
+			#google-logo:hover{
+			    /*border:.1rem solid transparent !important;*/
+				box-shadow:0 0 0 2px  #f0ad4e !important;
+
+			}
+						/*选中时变色*/
+			#bing-logo:active{
+			    /*border:.1rem solid transparent !important;*/
+				background:#449d44 linear-gradient(#4cae4c,#449d44);
+
+
+			}
+			#baidu-logo:active{
+			    /*border:.1rem solid transparent !important;*/
+				background:#286090 linear-gradient(#337ab7,#286090);
+
+			}
+			#google-logo:active{
+			    /*border:.1rem solid transparent !important;*/
+				background:#ec971f linear-gradient(#f0ad4e,#ec971f);
+
+			}
+			#search-plus:hover{
+				/*padding:.02rem 0 0 .02rem;*/
+				width:.58rem !important;
+				height:.58rem !important;
+
+			}
+			#search-plus:active{
+				/*padding:.02rem 0 0 .02rem;*/
+				width:.5rem !important;
+				height:.5rem !important;
+
+			}
+			/*
+			.btn:focus{
+			    outline: 1px solid #918e6f;
+			}*/
+			.btn{
+				color:#000;
+				/*//消除button的默认样式*/
+				margin: 0;
+				padding: 0;
+				outline: none;  /*  //消除默认点击蓝色边框效果*/
+				font-size:.23rem !important;
+
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<script src="../static/js/three.js"></script>
+		<script src="../static/js/Detector.js"></script>
+		<script src="../static/js/OrbitControls.js"></script>
+		<script src="../static/js/stats.min.js"></script>
+		<script src="../static/js/Cloth.js"></script>
+		<script src="../static/js/Sky.js"></script>
+		<script src="../static/js/dat.gui.min.js"></script>
+		<script src="../static/js/Tween.js"></script>
+		<script  type="module"  src="../static/js/meshes1.js"></script>	
+		<script src="../static/js/jquery-3.3.1.min.js"></script>	
+		<script src = "static/js/clock.js"></script>	
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+			<script>
+			$(document).ready(function(){
+		//上下搜索
+		$(".google-search1").click(function(){
+			window.open('http://www.google.com/search?q='+$(this).prev('input').val(),'');
+
+		});
+
+		$(".bing-search1").click(function(){
+			var a =$(this).prev().val;
+			window.open(' https://cn.bing.com/search?q='+$(this).prev('input').val()+ '&ensearch=1&FORM=BESBTB','');
+		});
+	//中间进行搜索
+		$(".baidu-search").click(function(){
+			window.open('http://www.baidu.com/s?wd='+$('#mid-input').val(),'');
+		});
+
+
+		$(".google-search").click(function(){
+			window.open('http://www.google.com/search?q='+$('#mid-input').val(),'');
+
+		});
+
+		$(".bing-search").click(function(){
+
+			window.open(' https://cn.bing.com/search?q='+$('#mid-input').val()+ '&ensearch=1&FORM=BESBTB','');
+		});
+		$("#search-plus").click(function(){
+
+			if($("#up-group").css("visibility")=="hidden"){
+			  $("#up-group").css("visibility","visible");
+  			  $("#bot-group").css("visibility","visible");
+
+			  // $(".open-list").html('<span class="glyphicon glyphicon-minus" ></span>');暂时没找到对应的减号需要ps下 mark！
+
+			}
+			else if($("#up-group").css("visibility")=="visible"){
+			  $("#up-group").css("visibility","hidden");
+  			  $("#bot-group").css("visibility","hidden");
+			  // $(".toggle-meta").css("visibility","hidden");
+			   // $(".open-list").html('<span class="glyphicon glyphicon-plus" ></span>');
+			}
+
+		});
+	})</script>
+		<section class="content">
+			<div class="searchbar">
+				<!-- 上 -->
+				<div class="input-group" id="up-group">
+					<span class="btn-cube"><img src="../static/images/icons/google.jpg" alt="g"class = "search-icon"></span>
+					<input type="text" placeholder="" id="up-input">
+	       			<button class="btn  search-button arc-border google-search1" id="google-logo" type="button" >Go</button>
+				</div>
+				<!-- 中 -->
+				<div class="input-group" id="mid-group">
+					<span  class = "input-group-addon btn-cube" ><img src="../static/images/icons/baidu.png" alt="b" class ="search-icon"></span>
+					<input type="text" placeholder="" id="mid-input">
+        			<button class="btn  search-button baidu-search" type="button"  id="baidu-logo">Du</button>
+        			<button class="btn  search-button bing-search " type="button" id="bing-logo">Bin
+        			</button>
+        			<button class="btn  search-button arc-border google-search " type="button" id="google-logo">GG
+        			</button>
+        			<button class = "btn search-button open-list" type = "button" ><img src="../static/images/icons/plus.png" alt="+" id = "search-plus"></button>
+
+				</div>
+				<!-- 下 -->
+				<div class="input-group" id ="bot-group">
+					<span  class = "input-group-addon btn-cube" ><img src="../static/images/icons/bing.png" alt="b" class = "search-icon"></span>
+					<input type="text" placeholder="" id="bot-input">
+        			<button class="btn search-button arc-border bing-search1" type="button" id="bing-logo">Bin
+					</button>
+				</div>
+			</div>
+		</section>
+		<canvas id="cas" width="300" height="150">抱歉，您的浏览器不支持canvas</canvas>
+		<div id="interactive"></div>	
+	</body>
+</html>

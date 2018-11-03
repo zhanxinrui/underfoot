@@ -86,7 +86,7 @@ function defineModel(name,attributes){
 					}
 					obj.createdAt = now;
 					obj.updatedAt = now;
-					obj.version = 0;
+					obj.version = 1;
 				}else{
 					obj.updatedAt = Date.now();
 					obj.version++;
