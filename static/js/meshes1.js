@@ -63,11 +63,13 @@ $(()=>{
 									console.log("i got the data");
 
 								}
-								else//等会替换成默认的设置，这块先检错
+								else{//等会替换成默认的设置，这块先检错
+									// window.location.href = IndexPage;
 									
 									weatherList = null;
 									console.log("出错了，没拿到数据");
 									resolve("ok 201");//如果reject在 await后就需要catch进行处理 在这里和resolve逻辑没什么不同所以就resolve
+								}
 							}
 						});
 					}
@@ -243,16 +245,20 @@ $(()=>{
 						else 
 							night = false;
 						if(!night){
-							if(ratio>0.5)//下午
-							height = 0+(ratio-0.5)*0.5;
-							else
-								height = 0+(0.5-ratio)*0.5//从最亮处-(ratio两倍即为半面白天的长)
-						}
+								if(ratio>0.5)//下午
+								height = 0+(ratio*2-1)*0.5;
+								// console.log('ratio',ratio);
+								else
+									height = 0+(1-ratio*2)*0.5//从最亮处-(ratio两倍即为半面白天的长)
+							}
 						else
 							height = 0.65;
-						effectController.inclination = height;
-						// 0.5太阳落山最后一刻，0.47 升起来能看到太阳最后一刻  0.44  0.46 天空
-				
+							// console.log("gap now :",gap,"ratio now ",ratio);
+							// console.log("inclination:",effectController.inclination);
+							// console.log("height:",height);
+							effectController.inclination = height;
+							// 0.5太阳落山最后一刻，0.47 升起来能看到太阳最后一刻  0.44  0.46 天空
+					
 				}
 				
 				var distance = 100000;
