@@ -1,7 +1,11 @@
 ### Underfoot
-This is a front web home index page with dynamic road background demo.
+![preview](static/images/preview-page.png)
 
-Implemented with nodejs, css3, three.js Tween.js
+- This is a front web home index page with dynamic road background demo. Implemented with nodejs, three.js, and Tween.js.
+
+
+- It will automatically change the weather according to your location. You can change the weather manually in "open controller" on the page.
+
 
 ### Using
 ```bash
