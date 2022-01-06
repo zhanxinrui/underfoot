@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize');
 const config = require('./config');
 const uuid = require('node-uuid');//通用唯一识别码，使分布式系统中的所有元素都有唯一辨识的信息
-console.log('init sequulize...');
+// console.log('init sequulize...');
 function generateId(){
 	return uuid.v4();
 }
@@ -30,12 +30,6 @@ var sequelize = new Sequelize(config.database,config.username,config.password,{
 	}
 });
 
-// var ex = db.defineModel('pets', {
-//     ownerId: db.ID,
-//     name: db.STRING(100),
-//     gender: db.BOOLEAN,
-//     birth: db.STRING(10),
-// });
 
 
 const ID_TYPE = Sequelize.STRING(50);
@@ -71,7 +65,7 @@ function defineModel(name,attributes){
 		type:Sequelize.BIGINT,
 		AllowNull:false
 	};
-	console.log('create table success');
+	// console.log('create table success');
 
 	return sequelize.define(name,attrs,{
 		tableName: name,
@@ -86,7 +80,7 @@ function defineModel(name,attributes){
 					}
 					obj.createdAt = now;
 					obj.updatedAt = now;
-					obj.version = 0;
+					obj.version = 1;
 				}else{
 					obj.updatedAt = Date.now();
 					obj.version++;

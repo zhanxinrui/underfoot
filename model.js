@@ -11,10 +11,10 @@ let js_files = files.filter((f)=>{
 module.exports = {};
 
 for(let f of js_files){
-	console.log(`import model from file ${f}...`);
+	// console.log(`import model from file ${f}...`);
 	let name = f.substring(0,f.length-3);
 	module.exports[name] = require(__dirname + '/model/'+f);
-	console.log("array"+typeof module.exports[name].create);
+	// console.log("array"+typeof module.exports[name].create);
 }
 //console.log(module.exports);
 module.exports.sync = ()=>{   //用来供自动创建的  init-db.js来调用

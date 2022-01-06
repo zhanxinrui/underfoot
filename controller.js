@@ -5,10 +5,10 @@ const fs = require('fs');
 // add url-route in /controllers:
 
 function addMapping(router, mapping) {//进行映射
-    for (var url in mapping) {//in只取序号
+    for (var url in mapping) {//in只取key controller中的各文件url:方法 对应映射
         if (url.startsWith('GET ')) {
-            var path = url.substring(4);
-            router.get(path, mapping[url]);
+            var path = url.substring(4);//后半部分
+            router.get(path, mapping[url]);//router的get方法每当传入用户输入值时调用就是用对应的controller/下各文件对象'xxx xxx'的方法
             console.log(`register URL mapping: GET ${path}`);
         } else if (url.startsWith('POST ')) {
             var path = url.substring(5);
